@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="manifest" href="band.webmanifest">
+<link rel="apple-touch-icon" href="band-apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MUDY Band">
+<title>MUDY Band 체험</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#191F28;--sub:#6B7684;--sub2:#8B95A1;--line:#E5E8EB;--bg:#F2F4F6;--o:#FF6B1A;--oBg:#FFF1E8;--g:#00A661;--safeB:env(safe-area-inset-bottom,0px);--safeT:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:"Pretendard Variable",Pretendard,"Noto Sans KR",system-ui,sans-serif;color:var(--ink);background:#DDE1E6;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;border:0;background:none;color:inherit}
+.app{position:relative;max-width:430px;height:100dvh;margin:0 auto;background:#fff;overflow:hidden}
+@media (min-width:600px){body{padding:24px 0}.app{height:calc(100dvh - 48px);max-height:900px;border-radius:36px;box-shadow:0 20px 60px rgba(0,0,0,.15)}}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;padding:calc(20px + var(--safeT)) 24px calc(24px + var(--safeB));transition:opacity .35s,transform .35s}
+.screen.off{opacity:0;transform:translateY(12px);pointer-events:none}
+
+/* intro */
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--o);background:var(--oBg);padding:6px 10px;border-radius:10px;align-self:flex-start;margin-top:28px}
+h1{font-size:28px;font-weight:800;letter-spacing:-0.03em;line-height:1.35;margin:16px 0 10px}
+.lead{font-size:16px;color:var(--sub);line-height:1.6}
+.mini-dev{margin:36px auto 0;width:150px;height:124px;border-radius:50%/46%;background:linear-gradient(160deg,#fff,#EEF0F2);box-shadow:0 18px 40px rgba(25,31,40,.12),inset 0 -6px 12px rgba(0,0,0,.04);display:grid;place-items:center}
+.mini-dev i{width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FF8A47,var(--o) 60%,#E5560B);box-shadow:0 0 0 6px #fff,0 0 0 13px var(--line)}
+.field{margin-top:auto}
+.field label{display:block;font-size:13px;color:var(--sub);font-weight:600;margin-bottom:6px}
+.field input{width:100%;height:54px;border-radius:14px;background:var(--bg);padding:0 16px;font-size:16px;outline:none}
+.field input:focus{box-shadow:inset 0 0 0 2px var(--o)}
+.sound{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sub);margin:14px 2px 0}
+.btn{width:100%;height:56px;border-radius:16px;font-size:17px;font-weight:700;cursor:pointer;margin-top:14px;transition:transform .1s}
+.btn:active{transform:scale(.98)}
+.btn.pri{background:var(--o);color:#fff}
+.btn.line{background:var(--bg);color:var(--ink)}
+
+/* band */
+.top{display:flex;justify-content:space-between;align-items:center;height:40px}
+.top b{font-size:15px;font-weight:800}
+.top span{font-size:13px;color:var(--sub);font-weight:600;display:flex;align-items:center;gap:6px}
+.top span i{width:8px;height:8px;border-radius:50%;background:var(--g)}
+.top span.bad i{background:var(--o)}
+.status{margin-top:18px;min-height:96px}
+.status small{font-size:14px;font-weight:700;color:var(--o)}
+.status h2{font-size:24px;font-weight:800;letter-spacing:-0.03em;line-height:1.4;margin-top:4px}
+.status p{font-size:15px;color:var(--sub);margin-top:6px;line-height:1.5}
+.devwrap{flex:1;display:grid;place-items:center;min-height:260px}
+.pebble{width:290px;height:244px;border-radius:50%/46%;background:linear-gradient(165deg,#FFFFFF 10%,#EDEFF2);box-shadow:0 30px 60px rgba(25,31,40,.14),0 6px 14px rgba(25,31,40,.06),inset 0 -10px 18px rgba(0,0,0,.035);display:grid;place-items:center;position:relative}
+.pebble .slit{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:5px}
+.pebble .slit i{width:14px;height:3px;border-radius:2px;background:#D5D9DE}
+.ring{width:196px;height:196px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--o) var(--p,0%),var(--line) 0);transition:box-shadow .4s;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}
+.ring .gap{width:176px;height:176px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.ring .btnc{width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#FF8F4F,var(--o) 58%,#E3540A);box-shadow:inset 0 -8px 16px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.25);display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;text-align:center;line-height:1.35;transition:transform .12s}
+.ring.press .btnc{transform:scale(.96)}
+.ring.breath{background:var(--o);animation:br 2.4s ease-in-out infinite}
+.ring.done{background:#fff;box-shadow:0 0 0 3px #EEF0F2,0 0 30px rgba(255,255,255,.9),0 0 40px rgba(25,31,40,.08)}
+.ring.done .btnc{background:radial-gradient(circle at 38% 32%,#FFB48A,#FF8F4F 60%,#F27A36)}
+@keyframes br{50%{box-shadow:0 0 38px rgba(255,107,26,.6);filter:brightness(1.1)}}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px}
+.steps div{height:5px;border-radius:3px;background:var(--line);transition:background .4s}
+.steps div.d{background:var(--ink)} .steps div.n{background:var(--o)}
+.slabels{display:grid;grid-template-columns:repeat(5,1fr);font-size:11px;color:var(--sub2);text-align:center;margin-top:6px}
+.slabels .n{color:var(--o);font-weight:700}
+.bubble{margin-top:14px;background:var(--bg);border-radius:16px;padding:14px 16px;font-size:15px;line-height:1.5;min-height:56px;display:flex;gap:10px;align-items:flex-start}
+.bubble b{flex:none;font-size:12px;font-weight:800;padding:3px 8px;border-radius:8px;background:#fff;margin-top:1px}
+.bubble b.robot{background:var(--ink);color:#fff}
+.hint{font-size:12px;color:var(--sub2);text-align:center;margin-top:10px;min-height:16px}
+.toast{position:absolute;left:50%;top:calc(16px + var(--safeT));transform:translate(-50%,-90px);background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:12px 18px;border-radius:14px;z-index:20;transition:transform .3s;white-space:nowrap}
+.toast.on{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- 인트로 -->
+  <section class="screen" id="intro">
+    <span class="tag">MUDY Band 체험</span>
+    <h1>갯벌에서 발이<br>빠졌다고 상상해 보세요</h1>
+    <p class="lead">위팔에 찬 밴드의 버튼을 3초 누르면<br>관제와 해경에 동시에 구조 요청이 가요.</p>
+    <div class="mini-dev"><i></i></div>
+    <div class="field"><label>이름 (관제 화면에 표시돼요)</label><input id="nick" maxlength="10"></div>
+    <div class="sound">🔈 소리를 켜면 밴드 음성이 들려요</div>
+    <button class="btn pri" id="start">체험 시작하기</button>
+  </section>
+
+  <!-- 밴드 -->
+  <section class="screen off" id="band">
+    <div class="top"><b>MUDY Band</b><span id="conn"><i></i>연결됨</span></div>
+    <div class="status">
+      <small id="sTag">대기</small>
+      <h2 id="sTitle">버튼을 3초 동안<br>길게 눌러주세요</h2>
+      <p id="sDesc">젖은 손이나 장갑으로도 누를 수 있어요</p>
+    </div>
+    <div class="devwrap">
+      <div class="pebble">
+        <div class="ring" id="ring"><div class="gap"><div class="btnc" id="btnc">길게<br>누르기</div></div></div>
+        <div class="slit"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div class="steps" id="steps"></div>
+    <div class="slabels" id="slabels"></div>
+    <div class="bubble" id="bubble"><b id="bWho">안내</b><span id="bText">구조가 필요할 때만 눌러주세요</span></div>
+    <div class="hint" id="hint"></div>
+    <button class="btn line" id="again" style="display:none">다시 체험하기</button>
+  </section>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="vendor/firebase-app-compat.js"></script>
+<script src="vendor/firebase-database-compat.js"></script>
+<script src="sync.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const { STEPS, VOICE, EX_VOICE } = MUDY;
+const S = MudySync;
+const LS = { get:k=>{ try{return localStorage.getItem(k);}catch(e){return null;} }, set:(k,v)=>{ try{ v==null?localStorage.removeItem(k):localStorage.setItem(k,v);}catch(e){} } };
+
+let name = LS.get('mudy_nick') || ('체험자 ' + String(Math.floor(Math.random()*90)+10));
+$('nick').value = name;
+let myId = null, cur = null, prev = null, watching = {};
+
+function toast(t){ const el=$('toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove('on'),2000); }
+function buzz(p){ try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} }
+function speak(t){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t); u.lang='ko-KR'; u.rate=1; u.pitch=1.05;
+    const v = speechSynthesis.getVoices().find(v=>v.lang && v.lang.startsWith('ko')); if (v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function say(pair){ $('bWho').textContent = pair[0]; $('bWho').className = pair[0]==='머디' ? 'robot' : ''; $('bText').textContent = '"' + pair[1] + '"'; speak(pair[1]); }
+
+/* 시작 — iOS 음성 잠금 해제를 위해 사용자 탭에서 한 번 말하기 */
+$('start').onclick = () => {
+  name = ($('nick').value || '').trim() || name; LS.set('mudy_nick', name);
+  try{ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); }catch(e){}
+  $('intro').classList.add('off'); $('band').classList.remove('off');
+  const saved = LS.get('mudy_req'); if (saved) attach(saved);
+  render();
+};
+
+S.onConn(ok => { const c=$('conn'); c.className = ok?'':'bad'; c.lastChild.textContent = S.mode==='local' ? '로컬 모드' : (ok?'연결됨':'신호 찾는 중'); });
+
+function attach(id){
+  myId = id; LS.set('mudy_req', id); prev = null;
+  if (watching[id]) return; watching[id] = true;
+  S.onRequest(id, r => { if (id !== myId) return; onUpdate(r); });
+}
+
+function onUpdate(r){
+  const before = cur; cur = r;
+  if (!r){ if (before){ toast('관제에서 체험을 초기화했어요'); } reset(false); return; }
+  if (r.status === 'cancelled'){ if (before && before.status!=='cancelled') { say(['밴드','요청을 취소했어요']); buzz([60,60,60]); } reset(false); return; }
+  if (before && before.status === 'active'){
+    if (r.step !== before.step){ say(VOICE[r.step]); buzz(r.step>=4?[300,100,300]:(r.step>=2?[120,80,120]:150)); }
+    else if (r.ex && r.ex !== before.ex && EX_VOICE[r.ex]){ say(EX_VOICE[r.ex]); buzz([80,80,80]); }
+    else if (r.manual && !before.manual){ say(EX_VOICE['4']); buzz([80,80,80]); }
+  }
+  render();
+}
+
+function reset(keepMsg){ myId=null; cur=null; LS.set('mudy_req', null); render(); }
+
+const TITLE = [
+  ['요청이 접수됐어요','움직이지 말고 기다려 주세요. 관제와 해경에 위치가 전달됐어요'],
+  ['머디가 오고 있어요','근거리 탐지로 정확한 위치를 찾고 있어요'],
+  ['머디가 도착했어요','앵커를 내리고 다리 주변에 물을 뿌려요. 밴드는 이제 진동만 해요'],
+  ['손잡이를 잡고 엎드려 주세요','매트가 천천히 감기면서 덜 무른 곳으로 이동해요'],
+  ['안전한 곳에 도착했어요','구조대원에게 인계돼요. 수고하셨어요']
+];
+function render(){
+  const r = cur && cur.status==='active' ? cur : null;
+  const step = r ? r.step : -1;
+  const ring = $('ring'); ring.classList.remove('breath','done'); ring.style.setProperty('--p','0%');
+  if (!r){
+    $('sTag').textContent='대기'; $('sTitle').innerHTML='버튼을 3초 동안<br>길게 눌러주세요'; $('sDesc').textContent='젖은 손이나 장갑으로도 누를 수 있어요';
+    $('btnc').innerHTML='길게<br>누르기'; $('hint').textContent=''; $('again').style.display='none';
+    if (!cur) { $('bWho').textContent='안내'; $('bWho').className=''; $('bText').textContent='구조가 필요할 때만 눌러주세요'; }
+  } else {
+    const t = r.manual ? ['구조대원이 직접 오고 있어요','머디가 접근하기 어려운 지형이에요. 그대로 기다려 주세요'] : TITLE[step];
+    $('sTag').textContent = r.manual ? '직접 진입' : (STEPS[step] + ' · ' + (step+1) + '/5');
+    $('sTitle').textContent = t[0]; $('sDesc').textContent = (r.ex==='2') ? '신호를 찾고 있어요. 다시 누르지 않아도 돼요' : (r.ex==='5' ? '손잡이를 놓쳤어요. 머디가 감기를 멈췄어요' : t[1]);
+    if (step>=4){ ring.classList.add('done'); $('btnc').innerHTML='완료'; $('hint').textContent=''; $('again').style.display='block'; }
+    else { ring.classList.add('breath'); $('btnc').innerHTML = step>=2 ? '진동만' : '접수됨'; $('hint').textContent='잘못 눌렀다면 다시 3초 누르면 취소돼요'; $('again').style.display='none'; }
+  }
+  $('steps').innerHTML = STEPS.map((_,i)=>`<div class="${step>i?'d':''} ${step===i?'n':''}"></div>`).join('');
+  $('slabels').innerHTML = STEPS.map((s,i)=>`<span class="${step===i?'n':''}">${s}</span>`).join('');
+}
+
+/* 3초 길게 누르기 */
+let timer=null, last=-1;
+function hold(onDone){
+  const t0=performance.now(); buzz(30); $('ring').classList.add('press');
+  timer=setInterval(()=>{
+    const p=Math.min(1,(performance.now()-t0)/3000);
+    const ring=$('ring'); ring.classList.remove('breath','done'); ring.style.setProperty('--p',(p*100)+'%');
+    $('btnc').innerHTML = Math.ceil(3-p*3) + '초';
+    const sec=Math.floor(p*3); if (sec!==last){ last=sec; if(p<1) buzz(25); }
+    if (p>=1){ stop(); onDone(); }
+  },40);
+}
+function stop(){ clearInterval(timer); timer=null; last=-1; $('ring').classList.remove('press'); }
+$('ring').addEventListener('pointerdown', e=>{
+  e.preventDefault();
+  const active = cur && cur.status==='active' && cur.step<4;
+  if (cur && cur.step>=4) return;
+  if (active) hold(()=>{ S.update(myId,{status:'cancelled'}); });
+  else hold(()=>{
+    const id = S.create({ name, status:'active', step:0, ex:null, manual:false, by:'band' });
+    cur = { name, status:'active', step:0 }; attach(id);
+    say(VOICE[0]); buzz(400); render();
+  });
+});
+addEventListener('pointerup', ()=>{ if(timer){ stop(); render(); } });
+addEventListener('pointercancel', ()=>{ if(timer){ stop(); render(); } });
+$('again').onclick = () => { reset(); };
+
+render();
+</script>
+
+<script>if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{});}</script>
+</body>
+</html>
