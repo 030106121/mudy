@@ -508,7 +508,7 @@ function renderDetail(){
   else if (r.step===3 && !r.approved){ txt='끌어내기 승인'; cls='go'; note='응답이 없으면 관리소가 대신 승인해요'; }
   else if (r.step===3){ txt = r.ex==='5' ? '감기 정지됨' : '끌어내는 중…'; }
   else { txt='구조 완료'; cls='ok'; note='구조대원에게 인계해 주세요'; }
-  A.className='actbar '+cls; A.disabled = cls!=='go';
+  A.className='actbar '+cls; A.disabled = false;
   $('actText').textContent=txt; $('stepIdx').textContent=idx; $('note').textContent=note;
   $('manual').style.display = (r.manual||done||cancelled)?'none':'block';
   const B={'2':['통신이 끊겼어요','마지막 위치를 기준으로, 근거리 탐지 접근 중'],'4':['로봇이 접근할 수 없어요','아래에서 구조대원 직접 진입을 승인해 주세요'],'5':['손잡이를 놓쳤어요','매트 감기를 즉시 멈췄어요. 로봇이 다시 안내 중']};
@@ -600,7 +600,13 @@ $('reset').onclick=()=>{
   delete $('reset').dataset.arm; $('reset').textContent='전체 초기화';
   S.clearAll(); sel=null; closeSheets(); go('list'); toast('모든 요청을 초기화했어요');
 };
-$('approve').onclick=()=>{ const r=cur(); if(!r || r.step!==3 || r.approved) return; S.update(sel,{approved:true, ex:null}); toast('끌어내기를 승인했어요'); };
+$('approve').onclick=()=>{
+  const r=cur(); if(!r || r.status!=='active' || r.manual || r.step>=4) return;
+  if (r.step===3 && !r.approved){ S.update(sel,{approved:true, ex:null}); toast('끌어내기를 승인했어요'); return; }
+  /* 시연용 숨은 기능: 짙은 상태 바를 누르면 다음 단계로 */
+  const patch={step:r.step+1, ex:null}; if(r.step+1===3) patch.approved=false;
+  S.update(sel,patch); buzz(20);
+};
 $('manual').onclick=()=>{ if(!cur()) return; S.update(sel,{manual:true, ex:null}); toast('구조대원 직접 진입으로 전환했어요'); };
 document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{
   const ex=b.dataset.ex;
