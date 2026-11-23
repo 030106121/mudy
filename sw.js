@@ -1,5 +1,5 @@
 /* 앱 껍데기를 저장해 와이파이가 불안정해도 화면이 열리게 함. 실시간 데이터는 네트워크로. */
-const CACHE = 'mudy-v9';
+const CACHE = 'mudy-v10';
 const FILES = ['./','./index.html','./band.html','./sync.js','./vendor/firebase-app-compat.js','./vendor/firebase-database-compat.js',
   './logo.png','./manifest.json','./band.webmanifest','./icon-192.png','./icon-512.png','./band-192.png','./band-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
