@@ -48,28 +48,27 @@ h1{font-size:28px;font-weight:800;letter-spacing:-0.03em;line-height:1.35;margin
 .status h2{font-size:24px;font-weight:800;letter-spacing:-0.03em;line-height:1.4;margin-top:4px}
 .status p{font-size:15px;color:var(--sub);margin-top:6px;line-height:1.5}
 .devwrap{flex:1;display:grid;place-items:center;min-height:270px}
-/* MUDY Band — 각진 사각 본체 + 주황 버튼 + 바람개비형 LED 4개 */
-.device{position:relative;width:320px;height:250px;display:grid;place-items:center;filter:drop-shadow(0 24px 28px rgba(25,31,40,.14)) drop-shadow(0 4px 8px rgba(25,31,40,.06))}
-.device .strap{position:absolute;top:50%;width:64px;height:150px;transform:translateY(-50%);border-radius:8px;background:repeating-linear-gradient(90deg,#1C1F24 0 3px,#2A2E35 3px 6px)}
-.device .strap.l{left:-26px}.device .strap.r{right:-26px}
-.device .lug{position:absolute;top:50%;width:36px;height:116px;transform:translateY(-50%);border:9px solid #F3F4F6;border-radius:13px;box-shadow:0 0 0 1px #D9DDE2,inset 0 0 0 1px #D9DDE2}
-.device .lug.l{left:16px}.device .lug.r{right:16px}
-.device .body{position:relative;z-index:2;width:240px;height:232px;background:linear-gradient(160deg,#FFFFFF,#E9ECEF);clip-path:polygon(28px 0,calc(100% - 28px) 0,100% 28px,100% calc(100% - 28px),calc(100% - 28px) 100%,28px 100%,0 calc(100% - 28px),0 28px)}
-.device .body::before{content:"";position:absolute;inset:7px;background:linear-gradient(160deg,#FBFCFD,#F1F3F5);clip-path:polygon(23px 0,calc(100% - 23px) 0,100% 23px,100% calc(100% - 23px),calc(100% - 23px) 100%,23px 100%,0 calc(100% - 23px),0 23px)}
-.ring{position:absolute;z-index:2;left:50%;top:50%;width:146px;height:146px;transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(155deg,#FFA36B,#FF7A2E 65%,#F66B1E);box-shadow:inset 0 0 0 4px rgba(214,86,18,.55),inset 0 -8px 14px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .12s,filter .3s}
-.ring .cap{width:40px;height:40px;border-radius:10px;background:#fff;box-shadow:0 2px 5px rgba(120,40,0,.18)}
-.ring .btnc{color:#fff;font-size:13px;font-weight:800;text-align:center;line-height:1.3;min-height:34px}
+/* MUDY Band — 모서리를 깎은 사각 본체 + 복숭아빛 버튼 판 + 각 변 가운데 LED 4개 (렌더 기준) */
+.device{position:relative;width:320px;height:250px;display:grid;place-items:center;filter:drop-shadow(0 22px 26px rgba(25,31,40,.13)) drop-shadow(0 3px 6px rgba(25,31,40,.06))}
+.device .lug{position:absolute;top:50%;width:62px;height:172px;transform:translateY(-50%);border:11px solid #ECEEF1;box-shadow:0 0 0 1.5px #C9CED4,inset 0 0 0 1.5px #C9CED4,0 6px 10px rgba(25,31,40,.08)}
+.device .lug.l{left:0;border-right:0;border-radius:20px 0 0 20px}
+.device .lug.r{right:0;border-left:0;border-radius:0 20px 20px 0}
+.device .body{position:relative;z-index:2;width:232px;height:240px;background:linear-gradient(160deg,#FFFFFF,#E8EBEE);clip-path:polygon(29px 0,calc(100% - 29px) 0,100% 29px,100% calc(100% - 29px),calc(100% - 29px) 100%,29px 100%,0 calc(100% - 29px),0 29px)}
+.device .body::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 9px,#D9DDE2 9px 10px,transparent 10px calc(100% - 10px),#D9DDE2 calc(100% - 10px) calc(100% - 9px),transparent calc(100% - 9px));clip-path:inset(29px 0)}
+.ring{position:absolute;z-index:2;left:50%;top:50%;width:164px;height:176px;transform:translate(-50%,-50%);border-radius:14px;background:linear-gradient(160deg,#FCD3B6,#F8C29C);box-shadow:inset 0 0 0 2.5px #E79A69,inset 0 0 0 5px rgba(255,255,255,.35),0 1px 0 #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .12s,filter .3s}
+.ring .cap{width:50px;height:50px;border-radius:10px;background:linear-gradient(160deg,#FFFFFF,#F2F3F5);box-shadow:0 0 0 2px #E9ECEF,0 2px 5px rgba(120,60,20,.15)}
+.ring .btnc{color:#A9531F;font-size:13px;font-weight:800;text-align:center;line-height:1.3;min-height:34px}
 .ring.press{transform:translate(-50%,-50%) scale(.97)}
-.ring.done{filter:saturate(.75) brightness(1.06)}
-.device .led{position:absolute;z-index:1;border-radius:6px;background:#FBD5BC;transition:background .15s,box-shadow .15s}
-.device .l1{top:14px;right:36px;width:108px;height:10px}
-.device .l2{right:14px;bottom:36px;width:10px;height:108px}
-.device .l3{bottom:14px;left:36px;width:108px;height:10px}
-.device .l4{left:14px;top:36px;width:10px;height:108px}
-.ring[data-n="1"]~.l1,.ring[data-n="2"]~.l1,.ring[data-n="2"]~.l2,.ring[data-n="3"]~.l1,.ring[data-n="3"]~.l2,.ring[data-n="3"]~.l3,.ring[data-n="4"]~.led{background:var(--o);box-shadow:0 0 12px rgba(255,107,26,.75)}
-.ring.breath~.led{background:var(--o);animation:ledbr 2.4s ease-in-out infinite}
-.ring.done~.led{background:#fff;box-shadow:0 0 0 1px #DCE0E5,0 0 14px #fff,0 0 8px rgba(25,31,40,.14)}
-@keyframes ledbr{50%{box-shadow:0 0 18px rgba(255,107,26,.85);filter:brightness(1.15)}}
+.ring.done{filter:saturate(.8) brightness(1.04)}
+.device .led{position:absolute;z-index:1;border-radius:8px;background:#F9CBAA;box-shadow:inset 0 0 0 1.5px #EDB38C;transition:background .15s,box-shadow .15s}
+.device .l1{top:12px;left:50%;width:124px;height:15px;transform:translateX(-50%)}
+.device .l3{bottom:12px;left:50%;width:124px;height:15px;transform:translateX(-50%)}
+.device .l4{left:13px;top:50%;width:14px;height:124px;transform:translateY(-50%)}
+.device .l2{right:13px;top:50%;width:14px;height:124px;transform:translateY(-50%)}
+.ring[data-n="1"]~.l1,.ring[data-n="2"]~.l1,.ring[data-n="2"]~.l2,.ring[data-n="3"]~.l1,.ring[data-n="3"]~.l2,.ring[data-n="3"]~.l3,.ring[data-n="4"]~.led{background:#FF7A30;box-shadow:inset 0 0 0 1.5px #F0621A,0 0 12px rgba(255,107,26,.7)}
+.ring.breath~.led{background:#FF7A30;box-shadow:inset 0 0 0 1.5px #F0621A;animation:ledbr 2.4s ease-in-out infinite}
+.ring.done~.led{background:#fff;box-shadow:inset 0 0 0 1.5px #DCE0E5,0 0 14px #fff,0 0 8px rgba(25,31,40,.14)}
+@keyframes ledbr{50%{box-shadow:inset 0 0 0 1.5px #F0621A,0 0 18px rgba(255,107,26,.85);filter:brightness(1.12)}}
 .device.mini{transform:scale(.52);margin:-34px auto -60px;pointer-events:none}
 @keyframes br{50%{box-shadow:0 0 38px rgba(255,107,26,.6);filter:brightness(1.1)}}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px}
@@ -93,7 +92,7 @@ h1{font-size:28px;font-weight:800;letter-spacing:-0.03em;line-height:1.35;margin
     <span class="tag">MUDY Band 체험</span>
     <h1>갯벌에서 발이<br>빠졌다고 상상해 보세요</h1>
     <p class="lead">위팔에 찬 밴드의 버튼을 3초 누르면<br>관제와 해경에 동시에 구조 요청이 가요.</p>
-    <div class="device mini" aria-hidden="true"><i class="strap l"></i><i class="strap r"></i><i class="lug l"></i><i class="lug r"></i>
+    <div class="device mini" aria-hidden="true"><i class="lug l"></i><i class="lug r"></i>
       <div class="body"><div class="ring"><i class="cap"></i><div class="btnc"></div></div><i class="led l1"></i><i class="led l2"></i><i class="led l3"></i><i class="led l4"></i></div></div>
     <div class="field"><label>이름 (관제 화면에 표시돼요)</label><input id="nick" maxlength="10"></div>
     <div class="sound">🔈 소리를 켜면 밴드 음성이 들려요</div>
@@ -109,7 +108,7 @@ h1{font-size:28px;font-weight:800;letter-spacing:-0.03em;line-height:1.35;margin
       <p id="sDesc">젖은 손이나 장갑으로도 누를 수 있어요</p>
     </div>
     <div class="devwrap">
-      <div class="device"><i class="strap l"></i><i class="strap r"></i><i class="lug l"></i><i class="lug r"></i>
+      <div class="device"><i class="lug l"></i><i class="lug r"></i>
         <div class="body">
           <div class="ring" id="ring"><i class="cap"></i><div class="btnc" id="btnc">길게<br>누르기</div></div>
           <i class="led l1"></i><i class="led l2"></i><i class="led l3"></i><i class="led l4"></i>
